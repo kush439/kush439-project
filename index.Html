@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project ADV-C80</title>
+</head>
+
+<body>
+    <center>
+        <div>
+            <h2>Guest List</h2>
+            <input id="text_input" placeholder="Enter name" type="text">
+            <button onclick="submit()">Submit</button>
+            <hr>
+            <div id="guest_list"></div>
+            <hr>
+        </div>
+        <div>
+            <h2>Guest List</h2>
+            <button onclick="show()">Show</button>
+            <div id="guest_show"></div>
+            <hr>
+            <button id="sorted" style="display: none;" onclick="sorting()">Sorted List</button>
+            <div id="guest_sorted"></div>
+            <hr>
+        </div>
+        <div>
+            <input id="search_input" placeholder="Enter name" type="text">
+            <button onclick="searching()">Search</button>
+            <div id="search_list"></div>
+        </div>
+    </center>
+</body>
+<script>
+    var names = [];
+    var count = 0;
+    var count1 = 0;
+    function submit() {
+        var value = document.getElementById("text_input").value;
+        names.push(value);
+        document.getElementById("guest_list").innerHTML = "<h3>" + names + "</h3>";
+        document.getElementById("guest_show").innerHTML = "";
+        document.getElementById("guest_sorted").innerHTML = "";
+        count = 0
+        count1 = 0
+        return false;
+    }
+    function show() {
+        count = count + 1;
+        var length = names.length;
+        for (var i = 0; i < length; i++) {
+            document.getElementById("guest_show").innerHTML += "<h3>" + names[i] + "</h3>";
+            names.join(" ");
+        }
+        document.getElementById("sorted").style.display = "inline-block";
+        check();
+    }
+    function sorting() {
+        count1 = count1 + 1;
+        var length1 = names.length;
+        var sorted = names.sort();
+        for (var i = 0; i < length1; i++) {
+            document.getElementById("guest_sorted").innerHTML += "<h3>" + sorted[i] + "</h3>";
+            names.join(" ");
+        }
+        check();
+    }
+    function searching() {
+        var txt = document.getElementById("search_input").value;
+        var found = 0;
+        var j;
+        for (j = 0; j < names.length; j++) {
+            if (txt == names[j]) {
+                found = found + 1;
+            }
+        }
+        document.getElementById("search_list").innerHTML = "Name found " + found + " time/s";   
+    }
+    function check() {
+        if (count > 1) {
+            document.getElementById("guest_show").innerHTML = "";
+        }
+        if (count1 > 1) {
+            document.getElementById("guest_sorted").innerHTML = "";
+        }
+    }
+</script>
+
+</html>
